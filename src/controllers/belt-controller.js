@@ -2,11 +2,11 @@
 
 const repository = require('../repositories/belt-repository');
 const guid = require('guid');
-const authService = require('../services/auth-service');
+// const authService = require('../services/auth-service');
 
 exports.get = async(req, res, next) => {
     try {
-        var data = await repository.get();
+        var data = await repository.getAll();
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -17,16 +17,14 @@ exports.get = async(req, res, next) => {
 
 exports.post = async(req, res, next) => {
     try {
-        const token = req.body.token || req.query.token || req.headers['x-access-token'];
-        const data = await authService.decodeToken(token);
+        // const token = req.body.token || req.query.token || req.headers['x-access-token'];
+        // const data = await authService.decodeToken(token);
 
         await repository.create({
-            customer: data.id,
-            number: guid.raw().substring(0, 6),
-            items: req.body.items
+            name: req.body.name
         });
         res.status(201).send({
-            message: 'Pedido cadastrado com sucesso!'
+            message: 'Faixa cadastrada com sucesso!'
         });
     } catch (e) {
         console.log(e);

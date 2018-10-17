@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Belt = mongoose.model('Belt');
 
-exports.get = async(data) => {
+exports.getAll = async() => {
     var res = await Belt
         .find({}, 'name');
     return res;
