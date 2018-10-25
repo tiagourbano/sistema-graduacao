@@ -31,7 +31,7 @@ const schema = new Schema({
             type: Date,
             required: true
         },
-        applyedBelt: {
+        appliedBelt: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Belt'
         },
@@ -41,7 +41,12 @@ const schema = new Schema({
             enum: ['pending', 'approved', 'disapproved'],
             default: 'pending'
         }
-    }]
+    }],
+    active: {
+        type: Boolean,
+        required: true,
+        default: true
+    }
 });
 
 module.exports = mongoose.model('User', schema);
