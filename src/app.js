@@ -14,11 +14,13 @@ mongoose.connect(config.connectionString);
 // Carrega os Models
 const Belt = require('./models/belt');
 const User = require('./models/user');
+const Blow = require('./models/blow');
 
 // Carrega as Rotas
 const indexRoute = require('./routes/index-route');
 const beltRoute = require('./routes/belt-route');
 const userRoute = require('./routes/user-route');
+const blowRoute = require('./routes/blow-route');
 
 app.use(bodyParser.json({
     limit: '5mb'
@@ -38,5 +40,6 @@ app.use(function (req, res, next) {
 app.use('/', indexRoute);
 app.use('/belts', beltRoute);
 app.use('/users', userRoute);
+app.use('/blows', blowRoute);
 
 module.exports = app;
