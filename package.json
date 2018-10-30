@@ -21,6 +21,6 @@
     "sendgrid": "^2.0.0"
   },
   "devDependencies": {
-    "nodemon": "^1.11.0"
+    "nodemon": "^1.18.5"
   }
 }

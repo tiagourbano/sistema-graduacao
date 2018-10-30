@@ -9,7 +9,9 @@ const app = express();
 const router = express.Router();
 
 // Connecta ao banco
-mongoose.connect(config.connectionString);
+mongoose.connect(config.connectionString, {
+    useMongoClient: true
+});
 
 // Carrega os Models
 const Belt = require('./models/belt');
