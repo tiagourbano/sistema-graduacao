@@ -32,5 +32,5 @@ exports.update = async(id, data) => {
 
 exports.delete = async(id) => {
     await Blow
-        .findOneAndRemove(id);
+        .findByIdAndRemove(id);
 }
