@@ -11,7 +11,9 @@ const controller = require('../controllers/user-controller');
 router.get('/', controller.getAll);
 router.get('/:name', controller.getByName);
 router.post('/', controller.post);
+router.post('/authenticate', controller.authenticate);
 router.put('/:id', controller.put);
+router.patch('/:id/apply-to-exam', controller.applyToExam);
 router.delete('/', controller.delete);
 
 module.exports = router;

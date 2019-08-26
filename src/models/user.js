@@ -40,7 +40,11 @@ const schema = new Schema({
             required: true,
             enum: ['pending', 'approved', 'disapproved'],
             default: 'pending'
-        }
+        },
+        examId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Exam'
+        },
     }],
     active: {
         type: Boolean,
