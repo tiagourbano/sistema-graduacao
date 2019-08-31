@@ -42,7 +42,12 @@ exports.post = async(req, res, next) => {
     try {
         await repository.create(req.body);
         res.status(201).send({
-            message: 'Usuário cadastrado com sucesso!'
+            message: 'Usuário cadastrado com sucesso!',
+            data: {
+                name: req.body.name,
+                email: req.body.email,
+                currentBelt: req.body.currentBelt
+            }
         });
     } catch (e) {
         console.log(e);
