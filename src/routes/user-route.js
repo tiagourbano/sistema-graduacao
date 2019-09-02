@@ -9,7 +9,7 @@ const controller = require('../controllers/user-controller');
 // router.post('/', authService.authorize, controller.post);
 
 router.get('/', controller.getAll);
-router.get('/:name', controller.getByName);
+router.get('/:id', controller.getById);
 router.post('/', controller.post);
 router.post('/authenticate', controller.authenticate);
 router.put('/:id', controller.put);

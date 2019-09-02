@@ -10,17 +10,6 @@ exports.getAll = async() => {
     return res;
 }
 
-exports.getByName = async(name) => {
-    var res = await User
-        .find({
-            name: name,
-            active: true
-        })
-        .populate('currentBelt', 'name')
-        .populate('historyBelt.appliedBelt', 'name');
-    return res;
-}
-
 exports.create = async(data) => {
     var user = new User(data);
     await user.save();
@@ -47,7 +36,9 @@ exports.authenticate = async(data) => {
 }
 
 exports.getById = async(id) => {
-    const res = await User.findById(id);
+    const res = await User.findById(id)
+        .populate('currentBelt', 'name')
+        .populate('historyBelt.appliedBelt', 'name');
     return res;
 }
 

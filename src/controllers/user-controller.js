@@ -15,9 +15,9 @@ exports.getAll = async(req, res, next) => {
     }
 }
 
-exports.getByName = async(req, res, next) => {
+exports.getById = async(req, res, next) => {
     try {
-        var data = await repository.getByName(req.params.name);
+        var data = await repository.getById(req.params.id);
         res.status(200).send(data);
     } catch (e) {
         res.status(500).send({
@@ -104,14 +104,23 @@ exports.authenticate = async(req, res, next) => {
             roles: user.roles
         });
 
+        const data = {
+            id: user._id,
+            name: user.name,
+            email: user.email,
+            dob: user.dob,
+            phone: user.phone,
+            address: user.address,
+            currentBelt: user.currentBelt
+        }
+
+        if (user.roles.includes('admin')) {
+            data['isMaster'] = true;
+        }
+
         res.status(201).send({
             token: token,
-            data: {
-                id: user._id,
-                name: user.name,
-                email: user.email,
-                currentBelt: user.currentBelt
-            }
+            data
         });
     } catch (e) {
         res.status(500).send({
