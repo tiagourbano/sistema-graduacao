@@ -15,6 +15,23 @@ exports.getNextExam = async() => {
   return res;
 }
 
+exports.getExams = async() => {
+  var currentYear = moment().year();
+
+  var res = await Exam
+    .find({
+      endDate: {
+        $gte: moment().day(0).month(0).year(currentYear).toDate()
+      }
+    })
+    .sort({endDate: 'desc'});
+  return res;
+}
+
+exports.getExamById = async(id) => {
+  return await Exam.findById(id);
+}
+
 exports.create = async(data) => {
   var exam = new Exam(data);
   await exam.save();

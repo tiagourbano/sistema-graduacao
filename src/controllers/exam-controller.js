@@ -14,6 +14,28 @@ exports.getNextExam = async(req, res, next) => {
   }
 }
 
+exports.getExams = async(req, res, next) => {
+  try {
+    var data = await repository.getExams();
+    res.status(200).send(data);
+  } catch (e) {
+    res.status(500).send({
+      message: 'Falha ao processar sua requisição'
+    });
+  }
+}
+
+exports.getExamById = async(req, res, next) => {
+  try {
+      var data = await repository.getExamById(req.params.id);
+      res.status(200).send(data);
+  } catch (e) {
+      res.status(500).send({
+          message: 'Falha ao processar sua requisição'
+      });
+  }
+}
+
 exports.post = async(req, res, next) => {
   try {
     await repository.create({
