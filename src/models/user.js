@@ -43,6 +43,10 @@ const schema = new Schema({
             type: Date,
             required: true
         },
+        currentBelt: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Belt'
+        },
         appliedBelt: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Belt'
@@ -50,13 +54,21 @@ const schema = new Schema({
         status: {
             type: String,
             required: true,
-            enum: ['pending', 'approved', 'disapproved'],
+            enum: ['pending', 'approved', 'failed'],
             default: 'pending'
         },
         examId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Exam'
         },
+        blows: [{
+            type: Number,
+            required: false,
+        }],
+        note: {
+            type: String,
+            required: false,
+        }
     }],
     active: {
         type: Boolean,

@@ -1,6 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const Blow = mongoose.model('Blow');
+const Belt = mongoose.model('Belt');
 
 exports.getAll = async() => {
     var res = await Blow
@@ -15,6 +16,14 @@ exports.getByBelt = async(beltId) => {
             belt: beltId
         })
         .populate('belt', 'name');
+
+    if (res === null) {
+        var belt = await Belt.findById(beltId);
+        res = {
+            belt,
+        }
+    }
+
     return res;
 }
 

@@ -10,6 +10,7 @@ const controller = require('../controllers/user-controller');
 
 router.get('/', controller.getAll);
 router.get('/:id', controller.getById);
+router.get('/exam/:id', controller.getByExamId);
 router.post('/', controller.post);
 router.post('/authenticate', controller.authenticate);
 router.put('/:id', controller.put);

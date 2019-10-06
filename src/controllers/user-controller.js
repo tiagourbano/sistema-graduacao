@@ -167,7 +167,7 @@ exports.refreshToken = async(req, res, next) => {
 exports.applyToExam = async(req, res, next) => {
     try {
         const response = await repository.applyToExam(req.params.id, req.body);
-        if (!response) {
+        if (response === false) {
             res.status(200).send({
                 message: 'Usuário já está aplicado a este exame!'
             });
@@ -183,3 +183,14 @@ exports.applyToExam = async(req, res, next) => {
         });
     }
 };
+
+exports.getByExamId = async(req, res, next) => {
+    try {
+        var data = await repository.getByExamId(req.params.id);
+        res.status(200).send(data);
+    } catch (e) {
+        res.status(500).send({
+            message: 'Falha ao processar sua requisição'
+        });
+    }
+}

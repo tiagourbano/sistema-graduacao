@@ -6,7 +6,8 @@ exports.getAll = async() => {
     var res = await User
         .find({})
         .populate('currentBelt', 'name')
-        .populate('historyBelt.appliedBelt', 'name');
+        .populate('historyBelt.appliedBelt', 'name')
+        .populate('historyBelt.currentBelt', 'name');
     return res;
 }
 
@@ -38,7 +39,8 @@ exports.authenticate = async(data) => {
 exports.getById = async(id) => {
     const res = await User.findById(id)
         .populate('currentBelt', 'name')
-        .populate('historyBelt.appliedBelt', 'name');
+        .populate('historyBelt.appliedBelt', 'name')
+        .populate('historyBelt.currentBelt', 'name');
     return res;
 }
 
@@ -55,16 +57,32 @@ exports.applyToExam = async(id, data) => {
         historyBelt.push({
             examId: data.examId,
             appliedBelt: data.appliedBelt,
+            currentBelt: data.currentBelt,
             status: 'pending'
         });
 
-        await User
+        const res = await User
             .findByIdAndUpdate(id, {
                 $set: {
                     historyBelt: historyBelt
                 }
             });
+        return res;
     } else {
         return false;
     }
+}
+
+exports.getByExamId = async(id) => {
+    const res = await User.find({})
+    .populate('currentBelt', 'name')
+    .populate({
+        path: 'historyBelt.examId',
+        match: {
+            _id: id
+        }
+    })
+    .populate('historyBelt.appliedBelt', 'name')
+    .populate('historyBelt.currentBelt', 'name');
+    return res;
 }
