@@ -14,15 +14,15 @@ const schema = new Schema({
     },
     dob: {
         type: Date,
-        required: true
+        required: false
     },
     phone: {
         type: String,
-        required: true
+        required: false
     },
     address: {
         type: String,
-        required: true
+        required: false
     },
     password: {
         type: String,
